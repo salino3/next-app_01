@@ -7,12 +7,7 @@ import { initialUserData, User, useUserStore } from "./interface";
 export const useAppStore = create<useUserStore>()(
   persist(
     (set) => ({
-      user: {
-        id: 0,
-        name: "",
-        email: "",
-        password: "",
-      },
+      user: initialUserData,
       setUser: (userData: User) => set((state) => ({ user: userData })),
 
       clearUser: () =>
