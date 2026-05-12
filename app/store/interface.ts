@@ -7,6 +7,13 @@ export interface User {
 
 export interface useUserStore {
   user: User;
-  setUser: (user: Partial<useUserStore>) => void;
+  setUser: (user: User) => void;
   clearUser: () => void;
 }
+
+export const initialUserData: User = {
+  id: null,
+  name: "",
+  email: "",
+  password: "",
+};

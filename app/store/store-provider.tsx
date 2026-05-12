@@ -2,7 +2,7 @@
 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import { useUserStore } from "./interface";
+import { initialUserData, User, useUserStore } from "./interface";
 
 export const useAppStore = create<useUserStore>()(
   persist(
@@ -13,13 +13,11 @@ export const useAppStore = create<useUserStore>()(
         email: "",
         password: "",
       },
-      setUser: (userData) =>
-        set((state) => ({
-          user: { ...state.user, ...userData.user },
-        })),
+      setUser: (userData: User) => set((state) => ({ user: userData })),
+
       clearUser: () =>
         set({
-          user: { id: 0, name: "", email: "", password: "" },
+          user: initialUserData,
         }),
     }),
     {
