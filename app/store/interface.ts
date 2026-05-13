@@ -16,3 +16,11 @@ export const initialUserData: User = {
   name: "",
   email: "",
 };
+
+//
+export interface MockUser {
+  id: number | null;
+  name: string;
+  email: string;
+  company: { name: string };
+}
