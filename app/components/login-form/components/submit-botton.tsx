@@ -5,9 +5,10 @@ import { useFormStatus } from "react-dom";
 // This must be a separate component to properly consume useFormStatus()
 export function SubmitButton() {
   const { pending, action, data, method } = useFormStatus();
-  console.log("clog2", pending, action, data, method);
 
   const emailBeingSubmitted = data?.get("email") as string;
+
+  // 'action' is for having the function reference
 
   console.log("Check type method:", method);
 
@@ -23,7 +24,7 @@ export function SubmitButton() {
       <button
         type="submit"
         disabled={pending}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors disabled:bg-blue-400 disabled:cursor-not-allowed"
+        className="cursor-pointer w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors disabled:bg-blue-400 disabled:cursor-not-allowed"
       >
         {pending ? "Loading..." : "Sign In"}
       </button>

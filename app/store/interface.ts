@@ -15,5 +15,4 @@ export const initialUserData: User = {
   id: null,
   name: "",
   email: "",
-  password: "",
 };
