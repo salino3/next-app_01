@@ -5,6 +5,7 @@ import { useShallow } from "zustand/shallow";
 import { useAppStore } from "@/app/store/store-provider";
 import { SubmitButton } from "./components/submit-botton";
 import { loginAction } from "./components/login-action.components";
+import { useUserStore } from "@/app/store/interface";
 
 // 3. Main Login Form Component
 export default function LoginFormComponent() {
@@ -12,7 +13,7 @@ export default function LoginFormComponent() {
     user: currentUser,
     setUser,
     clearUser,
-  } = useAppStore(
+  } = useAppStore<useUserStore>(
     useShallow((state) => ({
       user: state.user,
       setUser: state.setUser,
@@ -21,30 +22,22 @@ export default function LoginFormComponent() {
   );
 
   //
-  const formSubmitHandler = async (prevState: any, formData: FormData) => {
-    const result = await loginAction(prevState, formData);
-
-    // If successful, update our Zustand store!
-    if (result.success && result.user) {
-      setUser(result.user);
-    }
-
-    return result;
-  };
 
   // React 19 useActionState manages the form submission state smoothly
-  const [state, formAction] = useActionState(formSubmitHandler, {
-    success: false,
-    error: "",
-  });
+  // I can not pass third parameter for the fuction
+  const [state, formAction] = useActionState(
+    async (prevState: any, formData: FormData) =>
+      await loginAction(prevState, formData),
+    { success: false, error: "" },
+  );
 
   console.log("clog2", state);
 
   useEffect(() => {
-    if (state.success) {
-      setTimeout(() => alert("✓ Logged"), 0);
+    if (state && state.success && state?.user) {
+      setUser && setUser(state?.user);
     }
-  }, [state.success]);
+  }, [state && state.success]);
 
   return (
     <div className="max-w-md w-full mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">

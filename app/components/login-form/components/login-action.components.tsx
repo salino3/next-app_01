@@ -5,6 +5,7 @@ import { User } from "@/app/store/interface";
 // 1. The Server Action / Local Form Handler
 // In a full app, this function would call your backend API
 export async function loginAction(prevState: any, formData: FormData) {
+  const name = formData.get("name") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
@@ -23,9 +24,12 @@ export async function loginAction(prevState: any, formData: FormData) {
   // Mock successful response user data matching your User interface
   const mockUserData: User = {
     id: 101,
-    name: email.split("@")[0], // Mock name from email prefix
+    name: name,
     email: email,
   };
 
-  return { success: true, error: null, user: mockUserData };
+  // If successful, update our Zustand store!
+  if (mockUserData.name && mockUserData.email) {
+    return { success: true, error: null, user: mockUserData };
+  }
 }
