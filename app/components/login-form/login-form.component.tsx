@@ -1,73 +1,32 @@
 "use client";
 
 import { useActionState } from "react";
-import { useFormStatus } from "react-dom";
 import { useAppStore } from "@/app/store/store-provider";
-import { User } from "@/app/store/interface";
-
-// 1. The Server Action / Local Form Handler
-// In a full app, this function would call your backend API
-async function loginAction(prevState: any, formData: FormData) {
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-
-  // Simulate API Network Delay (1.5 seconds)
-  await new Promise((resolve) => setTimeout(resolve, 1500));
-
-  // Simple validation check
-  if (!email || !password) {
-    return { success: false, error: "All fields are required." };
-  }
-
-  if (password.length < 6) {
-    return { success: false, error: "Password must be at least 6 characters." };
-  }
-
-  // Mock successful response user data matching your User interface
-  const mockUserData: User = {
-    id: 101,
-    name: email.split("@")[0], // Mock name from email prefix
-    email: email,
-  };
-
-  return { success: true, error: null, user: mockUserData };
-}
-
-// 2. A Dedicated Submit Button Component
-// This must be a separate component to properly consume useFormStatus()
-function SubmitButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <button
-      type="submit"
-      disabled={pending}
-      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors disabled:bg-blue-400 disabled:cursor-not-allowed"
-    >
-      {pending ? "Logging in..." : "Sign In"}
-    </button>
-  );
-}
+import { SubmitButton } from "./components/submit-botton";
+import { loginAction } from "./components/login-action.components";
 
 // 3. Main Login Form Component
 export default function LoginFormComponent() {
   const setUser = useAppStore((state) => state.setUser);
   const currentUser = useAppStore((state) => state.user);
 
+  //
+  const formSubmitHandler = async (prevState: any, formData: FormData) => {
+    const result = await loginAction(prevState, formData);
+
+    // If successful, update our Zustand store!
+    if (result.success && result.user) {
+      setUser(result.user);
+    }
+
+    return result;
+  };
+
   // React 19 useActionState manages the form submission state smoothly
-  const [state, formAction] = useActionState(
-    async (prevState: any, formData: FormData) => {
-      const result = await loginAction(prevState, formData);
-
-      // If successful, update our Zustand store!
-      if (result.success && result.user) {
-        setUser(result.user);
-      }
-
-      return result;
-    },
-    { success: false, error: "" },
-  );
+  const [state, formAction] = useActionState(formSubmitHandler, {
+    success: false,
+    error: "",
+  });
 
   return (
     <div className="max-w-md w-full mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
