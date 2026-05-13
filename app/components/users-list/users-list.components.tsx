@@ -27,7 +27,7 @@ export default function UserData() {
         <h2 className="text-xl font-bold">UserData</h2>
         <button
           onClick={handleRefresh}
-          className="text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+          className="cursor-pointer   text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
         >
           Refresh Data
         </button>

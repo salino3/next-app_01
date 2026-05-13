@@ -15,8 +15,11 @@ const HomePage = () => {
   );
 
   return (
-    <div data-component="HomePage">
-      <h1>HomePage</h1>
+    <div
+      data-component="HomePage"
+      className="flex flex-col justify-center items-center gap-2 p-2"
+    >
+      <h1 className="text-center text-3xl">HomePage</h1>
       <LoginFormComponent />
       {currentUser && currentUser.id && <UserData />}
     </div>
