@@ -16,6 +16,7 @@ export default function UserData() {
     setUserPromise(fetchUserProfile());
   }, []);
 
+  //
   const handleRefresh = () => {
     setUserPromise(fetchUserProfile());
   };
