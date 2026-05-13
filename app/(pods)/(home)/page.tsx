@@ -2,7 +2,7 @@
 
 import { useShallow } from "zustand/react/shallow";
 import LoginFormComponent from "@/app/components/login-form/login-form.component";
-import DashboardPage from "@/app/components/users-list/users-list.components";
+import UserData from "@/app/components/users-list/users-list.components";
 import { useAppStore } from "@/app/store/store-provider";
 import { useUserStore } from "@/app/store/interface";
 
@@ -18,7 +18,7 @@ const HomePage = () => {
     <div data-component="HomePage">
       <h1>HomePage</h1>
       <LoginFormComponent />
-      {currentUser && currentUser.id && <DashboardPage />}
+      {currentUser && currentUser.id && <UserData />}
     </div>
   );
 };
