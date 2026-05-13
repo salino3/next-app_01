@@ -5,6 +5,9 @@ import { User } from "@/app/store/interface";
 // 1. The Server Action / Local Form Handler
 // In a full app, this function would call your backend API
 export async function loginAction(prevState: any, formData: FormData) {
+  //   const data = Object.fromEntries(formData.entries());
+  //   console.log("Data form:", data); // result on terminal, like Nodejs
+  // Or one by one
   const name = formData.get("name") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
