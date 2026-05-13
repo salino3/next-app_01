@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useShallow } from "zustand/shallow";
 import { useAppStore } from "@/app/store/store-provider";
 import { SubmitButton } from "./components/submit-botton";
@@ -40,6 +40,12 @@ export default function LoginFormComponent() {
 
   console.log("clog2", state);
 
+  useEffect(() => {
+    if (state.success) {
+      setTimeout(() => alert("✓ Logged"), 0);
+    }
+  }, [state.success]);
+
   return (
     <div className="max-w-md w-full mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md border border-gray-200 dark:border-gray-700">
       <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white text-center">
@@ -75,7 +81,6 @@ export default function LoginFormComponent() {
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent text-gray-900 dark:text-white"
             />
           </div>
-
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Email Address
@@ -87,7 +92,6 @@ export default function LoginFormComponent() {
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent text-gray-900 dark:text-white"
             />
           </div>
-
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Password
@@ -99,14 +103,12 @@ export default function LoginFormComponent() {
               className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-transparent text-gray-900 dark:text-white"
             />
           </div>
-
           {/* Render error alerts cleanly without separate useEffect hooks */}
           {state?.error && (
             <div className="p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded-md">
               {state.error}
             </div>
           )}
-
           <SubmitButton />
         </form>
       )}
