@@ -12,7 +12,7 @@ export async function searchByIdAction(
 ): Promise<ActionState> {
   const { id } = Object.fromEntries(formData.entries());
 
-  //x It is true if the string is convertible to a number
+  // It is true if the string is convertible to a number
   if (!isNaN(Number(id)) && id) {
     return { success: true, error: "", id };
   }
