@@ -2,7 +2,11 @@
 
 import { useFormStatus } from "react-dom";
 
-export function SubmitBtnTodo() {
+interface Props {
+  id: string;
+}
+
+export function SubmitBtnTodo({ id }: Props) {
   const { pending } = useFormStatus();
   return (
     <button
@@ -10,7 +14,7 @@ export function SubmitBtnTodo() {
       disabled={pending}
       className="cursor-pointer w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors disabled:bg-blue-400 disabled:cursor-not-allowed"
     >
-      {pending ? "Loading..." : "Submit"}
+      {pending ? "Loading..." : id ? "Call Todos List" : "Submit Todo Search"}
     </button>
   );
 }

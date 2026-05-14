@@ -19,9 +19,11 @@ export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
   useEffect(() => {
     if (state.success && state.id) {
       setSearchTodoById(state.id);
+    } else {
+      setSearchTodoById("");
     }
   }, [state]);
-  console.log("PENDING", isPending);
+
   return (
     <form data-component="TodoForm" action={formAction}>
       <fieldset disabled={isPending} className={"flex flex-col gap-2"}>
@@ -41,7 +43,7 @@ export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
             {state.error}
           </div>
         )}
-        <SubmitBtnTodo />
+        <SubmitBtnTodo id={state?.id ?? ""} />
       </fieldset>
     </form>
   );
