@@ -1,9 +1,16 @@
 "use client";
 
-import { Dispatch, SetStateAction, useActionState, useEffect } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useActionState,
+  useEffect,
+  useState,
+} from "react";
 import { FormStateContext } from "@/app/context/form-state-context";
 import { searchByIdAction } from "../search-by-id-action/search-by-id-action.component";
 import { SubmitBtnTodo } from "../submit-btn-todo/submit-btn-todo.component";
+import { BtnCallList } from "../btn-call-list/btn-call-list.component";
 
 interface TodoFormProps {
   setSearchTodoById: Dispatch<SetStateAction<string>>;
@@ -16,6 +23,8 @@ export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
       await searchByIdAction(prevState, formData),
     { success: false, error: "" },
   );
+
+  const [inputId, setInputId] = useState<string>("");
 
   useEffect(() => {
     if (state.success && state.id) {
@@ -38,6 +47,8 @@ export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
               name="id"
               id="id"
               type="number"
+              value={inputId}
+              onChange={(e) => setInputId(e.target.value)}
             />
           </div>
           {state?.error && (
@@ -45,7 +56,8 @@ export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
               {state.error}
             </div>
           )}
-          <SubmitBtnTodo />
+          <BtnCallList />
+          <SubmitBtnTodo inputId={inputId} />
         </fieldset>
       </FormStateContext.Provider>
     </form>
