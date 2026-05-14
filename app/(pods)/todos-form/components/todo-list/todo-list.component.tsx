@@ -13,7 +13,6 @@ export const TodoList = ({ userPromiseTodo }: TodosProps) => {
   }
 
   const todosData = use(userPromiseTodo);
-  console.log("clog4", todosData);
 
   if (todosData && Array.isArray(todosData)) {
     return (

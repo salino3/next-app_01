@@ -16,7 +16,7 @@ const TodosFormPage = () => {
   useEffect(() => {
     setPromiseTodo(fetchTodos(searchTodoById));
   }, [searchTodoById]);
-  console.log("clog7", searchTodoById);
+
   return (
     <div
       data-component="TodosFormPage"

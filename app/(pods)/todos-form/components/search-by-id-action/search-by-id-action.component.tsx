@@ -12,9 +12,8 @@ export async function searchByIdAction(
 ): Promise<ActionState> {
   const { id } = Object.fromEntries(formData.entries());
 
-  console.log("clog5", id);
-
-  if (id) {
+  // It is true if the string is convertible to a number
+  if (!isNaN(Number(id)) && id) {
     return { success: true, error: "", id };
   }
 
