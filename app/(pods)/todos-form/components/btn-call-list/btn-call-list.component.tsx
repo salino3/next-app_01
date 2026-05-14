@@ -13,7 +13,6 @@ export function BtnCallList({ inputId }: Props) {
 
   // Using 'use' to extract state from context
   const { id } = use(FormStateContext);
-  console.log("state", id);
 
   if (id) {
     return (
