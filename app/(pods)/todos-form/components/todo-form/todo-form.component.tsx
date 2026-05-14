@@ -29,6 +29,7 @@ export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
   useEffect(() => {
     if (state.success && state.id) {
       setSearchTodoById(state.id);
+      setInputId("");
     } else {
       setSearchTodoById("");
     }
@@ -56,7 +57,7 @@ export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
               {state.error}
             </div>
           )}
-          <BtnCallList />
+          <BtnCallList inputId={inputId} />
           <SubmitBtnTodo inputId={inputId} />
         </fieldset>
       </FormStateContext.Provider>
