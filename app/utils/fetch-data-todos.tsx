@@ -1,7 +1,9 @@
 "use server";
 import { MockTodo } from "../store/interface";
 
-export async function fetchTodos(id?: number): Promise<MockTodo | MockTodo[]> {
+export async function fetchTodos(
+  id?: number | null,
+): Promise<MockTodo | MockTodo[]> {
   return fetch(
     id
       ? `https://jsonplaceholder.typicode.com/todos/${String(id)}`

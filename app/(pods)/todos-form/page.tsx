@@ -11,10 +11,11 @@ const TodosFormPage = () => {
     MockTodo | MockTodo[]
   > | null>(null);
 
+  const [searchTodoById, setSearchTodoById] = useState<number | null>(null);
+
   useEffect(() => {
-    // Innesca la promise una volta sola al mount del componente
-    setPromiseTodo(fetchTodos());
-  }, []);
+    setPromiseTodo(fetchTodos(searchTodoById));
+  }, [searchTodoById]);
 
   return (
     <div
@@ -23,7 +24,7 @@ const TodosFormPage = () => {
     >
       <h1 className="text-center text-3xl">Todos Form Page</h1>
 
-      <TodoForm />
+      <TodoForm setSearchTodoById={setSearchTodoById} />
       <Suspense
         fallback={
           <div className="p-4 border rounded-lg animate-pulse bg-gray-100 text-center text-sm text-gray-500">
