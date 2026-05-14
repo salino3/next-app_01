@@ -11,12 +11,12 @@ const TodosFormPage = () => {
     MockTodo | MockTodo[]
   > | null>(null);
 
-  const [searchTodoById, setSearchTodoById] = useState<number | null>(null);
+  const [searchTodoById, setSearchTodoById] = useState<string>("");
 
   useEffect(() => {
     setPromiseTodo(fetchTodos(searchTodoById));
   }, [searchTodoById]);
-
+  console.log("clog7", searchTodoById);
   return (
     <div
       data-component="TodosFormPage"

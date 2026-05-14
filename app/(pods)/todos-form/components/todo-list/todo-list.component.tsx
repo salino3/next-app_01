@@ -14,9 +14,10 @@ export const TodoList = ({ userPromiseTodo }: TodosProps) => {
 
   const todosData = use(userPromiseTodo);
   console.log("clog4", todosData);
-  return (
-    <div data-component="TodoList">
-      {todosData && Array.isArray(todosData) && todosData.length > 1 ? (
+
+  if (todosData && Array.isArray(todosData)) {
+    return (
+      <div data-component="TodoList">
         <ul className="flex flex-col justify-center items-center gap-1">
           {todosData &&
             todosData.length > 0 &&
@@ -29,9 +30,13 @@ export const TodoList = ({ userPromiseTodo }: TodosProps) => {
               </li>
             ))}
         </ul>
-      ) : (
-        ""
-      )}
+      </div>
+    );
+  }
+
+  return (
+    <div data-component="TodoList">
+      <strong>{todosData && todosData.title}</strong>
     </div>
   );
 };
