@@ -13,8 +13,15 @@ const TodosFormPage = () => {
 
   const [searchTodoById, setSearchTodoById] = useState<string>("");
 
+  console.log("clog7", searchTodoById);
   useEffect(() => {
-    setPromiseTodo(fetchTodos(searchTodoById));
+    if (searchTodoById) {
+      if (Number(searchTodoById) > 0) {
+        setPromiseTodo(fetchTodos(searchTodoById));
+      }
+    } else {
+      setPromiseTodo(fetchTodos(searchTodoById));
+    }
   }, [searchTodoById]);
 
   return (

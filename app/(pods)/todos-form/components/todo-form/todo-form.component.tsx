@@ -27,11 +27,13 @@ export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
   const [inputId, setInputId] = useState<string>("");
 
   useEffect(() => {
-    if (state.success && state.id) {
-      setSearchTodoById(state.id);
+    if (state.success) {
+      if (state.id) {
+        setSearchTodoById(state.id);
+      } else {
+        setSearchTodoById("");
+      }
       setInputId("");
-    } else {
-      setSearchTodoById("");
     }
   }, [state]);
 
@@ -40,7 +42,7 @@ export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
       <FormStateContext.Provider value={{ id: state.id }}>
         <fieldset disabled={isPending} className={"flex flex-col gap-2"}>
           <legend>Todo Form</legend>
-          <div className="bg-blue-400 border flex flex-col w-[250px] rounded-sm p-2">
+          <div className="w-full  bg-blue-400 border flex flex-col w-[250px] rounded-sm p-2">
             <label htmlFor="id">ID Todo</label>
             <input
               className="border bg-black pl-0.5 rounded-sm"
