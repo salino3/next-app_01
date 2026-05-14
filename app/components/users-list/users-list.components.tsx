@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, Suspense, useEffect } from "react";
-import { fetchUserProfile } from "@/app/utils/fetch-data-users.components";
+import { fetchUserProfile } from "@/app/utils/fetch-data-users";
 import { UserCard } from "./user-card.component";
 import { MockUser } from "@/app/store/interface";
 
