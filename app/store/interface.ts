@@ -24,3 +24,10 @@ export interface MockUser {
   email: string;
   company: { name: string };
 }
+
+export interface MockTodo {
+  userId: number | null;
+  id: number;
+  title: string;
+  completed: boolean;
+}
