@@ -9,9 +9,10 @@ export const MainHeader = () => {
      `);
 
   const aStyles = clsx(`
-  flex flex-row justify-center items-center border-2 border-blue-800 bg-blue-500 hover:animate-pulse
+  flex flex-row justify-center items-center border-2 border-blue-800 bg-blue-500 
+   animate-bounce hover:animate-pulse
    hover:bg-blue-400 px-2 rounded-md 
-   transition-transform active:scale-x-[1.2] active:scale-y-[0.7]
+   transition-transform   active:scale-x-[1.2] active:scale-y-[0.7]
     `);
   //  transform: transiction
   //  transform: scale(1.2, 0.7);
