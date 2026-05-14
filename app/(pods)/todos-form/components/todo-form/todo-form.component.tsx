@@ -1,3 +1,4 @@
+"use client";
 export const TodoForm = () => {
   return (
     <form data-component="TodoForm" action="">

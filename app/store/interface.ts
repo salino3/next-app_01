@@ -26,7 +26,7 @@ export interface MockUser {
 }
 
 export interface MockTodo {
-  userId: number;
+  userId: number | null;
   id: number;
   title: string;
   completed: boolean;
