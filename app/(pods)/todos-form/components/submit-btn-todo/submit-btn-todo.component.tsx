@@ -1,13 +1,15 @@
 "use client";
 
+import { use } from "react";
 import { useFormStatus } from "react-dom";
+import { FormStateContext } from "@/app/context/form-state-context";
 
-interface Props {
-  id: string;
-}
-
-export function SubmitBtnTodo({ id }: Props) {
+export function SubmitBtnTodo() {
   const { pending } = useFormStatus();
+
+  // Using 'use' to extract state from context
+  const { id } = use(FormStateContext);
+
   return (
     <button
       type="submit"

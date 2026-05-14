@@ -1,6 +1,7 @@
 "use client";
 
 import { Dispatch, SetStateAction, useActionState, useEffect } from "react";
+import { FormStateContext } from "@/app/context/form-state-context";
 import { searchByIdAction } from "../search-by-id-action/search-by-id-action.component";
 import { SubmitBtnTodo } from "../submit-btn-todo/submit-btn-todo.component";
 
@@ -26,25 +27,27 @@ export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
 
   return (
     <form data-component="TodoForm" action={formAction}>
-      <fieldset disabled={isPending} className={"flex flex-col gap-2"}>
-        <legend>Todo Form</legend>
-        <div className="bg-blue-400 border flex flex-col w-[250px] rounded-sm p-2">
-          <label htmlFor="id">ID Todo</label>
-          <input
-            className="border bg-black pl-0.5 rounded-sm"
-            placeholder="Search a Todo (number)"
-            name="id"
-            id="id"
-            type="number"
-          />
-        </div>
-        {state?.error && (
-          <div className="p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded-md">
-            {state.error}
+      <FormStateContext.Provider value={{ id: state.id }}>
+        <fieldset disabled={isPending} className={"flex flex-col gap-2"}>
+          <legend>Todo Form</legend>
+          <div className="bg-blue-400 border flex flex-col w-[250px] rounded-sm p-2">
+            <label htmlFor="id">ID Todo</label>
+            <input
+              className="border bg-black pl-0.5 rounded-sm"
+              placeholder="Search a Todo (number)"
+              name="id"
+              id="id"
+              type="number"
+            />
           </div>
-        )}
-        <SubmitBtnTodo id={state?.id ?? ""} />
-      </fieldset>
+          {state?.error && (
+            <div className="p-3 bg-red-50 border border-red-200 text-red-600 text-sm rounded-md">
+              {state.error}
+            </div>
+          )}
+          <SubmitBtnTodo />
+        </fieldset>
+      </FormStateContext.Provider>
     </form>
   );
 };
