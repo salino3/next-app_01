@@ -3,17 +3,14 @@
 import { Dispatch, SetStateAction, useActionState, useEffect } from "react";
 import { searchByIdAction } from "../search-by-id-action/search-by-id-action.component";
 import { SubmitBtnTodo } from "../submit-btn-todo/submit-btn-todo.component";
-import { useFormStatus } from "react-dom";
 
 interface TodoFormProps {
   setSearchTodoById: Dispatch<SetStateAction<string>>;
 }
 
 export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
-  const { pending } = useFormStatus();
-
   //
-  const [state, formAction] = useActionState(
+  const [state, formAction, isPending] = useActionState(
     async (prevState: any, formData: FormData) =>
       await searchByIdAction(prevState, formData),
     { success: false, error: "" },
@@ -24,10 +21,10 @@ export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
       setSearchTodoById(state.id);
     }
   }, [state]);
-
+  console.log("PENDING", isPending);
   return (
     <form data-component="TodoForm" action={formAction}>
-      <fieldset disabled={pending} className={"flex flex-col gap-2"}>
+      <fieldset disabled={isPending} className={"flex flex-col gap-2"}>
         <legend>Todo Form</legend>
         <div className="bg-blue-400 border flex flex-col w-[250px] rounded-sm p-2">
           <label htmlFor="id">ID Todo</label>
@@ -44,7 +41,7 @@ export const TodoForm = ({ setSearchTodoById }: TodoFormProps) => {
             {state.error}
           </div>
         )}
-        <SubmitBtnTodo pending={pending} />
+        <SubmitBtnTodo />
       </fieldset>
     </form>
   );
