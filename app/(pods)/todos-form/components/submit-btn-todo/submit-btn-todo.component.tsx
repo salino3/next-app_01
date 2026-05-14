@@ -1,9 +1,10 @@
 "use client";
-import { useFormStatus } from "react-dom";
 
-export function SubmitBtnTodo() {
-  const { pending } = useFormStatus();
+interface Props {
+  pending: boolean;
+}
 
+export function SubmitBtnTodo({ pending }: Props) {
   return (
     <button
       type="submit"
